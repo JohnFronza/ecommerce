@@ -1,0 +1,56 @@
+
+body {
+    background-color: #065E70 !important;
+    width: 100%;
+    height:100%;
+}
+
+.navbar-brand {
+    margin-left: 20px;
+}
+.button {
+    --bs-btn-font-weight: 600;
+    --bs-btn-bg: #55D8F2;
+    --bs-btn-hover-bg: #0CCAF0;
+    --bs-btn-hover-border-color: #0CCAF0;
+    --bs-btn-border-color: #55D8F2;
+    --bs-btn-border-radius: .5rem;
+}
+.search {
+    background-color: #065E70;
+    border: none;
+}
+.navbar {
+    background-color: #099FBD;
+    border-color: #55D8F2 !important;
+
+
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.janela {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    width: 80%;
+    background-color: azure;
+}
+
+.produtos {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(46, 165, 52);
+}
+
+.categorias {
+    height: 100%;
+    min-width: 300px;
+    background-color: blue;
+}
+
+

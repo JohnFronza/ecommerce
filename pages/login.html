@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/snippet.css">
+
+</head>
+<body>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+
+    <!-- Login Form -->
+    <form id="form" method="post" >
+      <h3 style="margin-top: 15px">Login</h3>
+
+      <input type="email" class="fadeIn second" id="email" placeholder="Email" required>
+      <input type="password" class="fadeIn third" id="senha" placeholder="Senha" required>
+      <input type="submit" class="fadeIn fourth" value="Log In" id="login">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="?page=register">Não possui conta? Registre-se.</a>
+    </div>
+    
+    <div id="alert" class="alert alert-warning" role="alert">
+      Login inválido!
+    </div>
+
+    <script>
+      $("#alert").hide()
+
+      $("#form").submit(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        $.post(
+        "./scripts/php/login.php",
+        {
+          "login": true,
+          "email": $("#email").val(),
+          "senha": $("#senha").val()
+        },
+
+        function (data) {
+          if (data == "usuario inexistente  "){
+            $("#alert").show();
+          }
+          else {
+            location.href = "?page=home";
+          }
+        });
+
+      })
+    </script>
+
+  </div>
+
+</div>
+
+</body>
+</html>
