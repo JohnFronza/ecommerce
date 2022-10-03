@@ -57,13 +57,33 @@
 
     <div class="main">
         <div class="janela">
-            <!--<div class="form border border-info border-3 rounded"></div>-->
-
+                <!-- Categorias -->
             <div class="categorias">
-                <h1>Categorias<h1>
+                <nav class="nav flex-column">
+                    <a class="nav-link disabled"><b>Eletrônicos</b></a>
+                    <a  class="nav-link active" aria-current="page" href="#">Celulares e Smartphones</a>
+                    <a  class="nav-link active" aria-current="page" href="#">TV e vídeo</a>
+                    <a class="nav-link disabled"><b>Casa</b></a>
+                    <a  class="nav-link active" aria-current="page" href="#">Eletrodomésticos</a>
+                    <a  class="nav-link active" aria-current="page" href="#">Móveis e decoração</a>
+                </nav>
             </div>
+
+                <!-- Produtos -->
             <div class="produtos">
-                <h1>Produtos<h1>
+                <div class="card mt-4 ml-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="images/cellphone.jpg" class="img-fluid rounded-start" alt="phone">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a class="card-title" href="#"><b>Título</b></a>
+                                <p class="card-text">Descrição</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

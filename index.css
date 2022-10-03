@@ -41,16 +41,25 @@ body {
     background-color: azure;
 }
 
-.produtos {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(46, 165, 52);
-}
-
 .categorias {
     height: 100%;
     min-width: 300px;
-    background-color: blue;
+    background-color: #0CCAF0;
 }
+
+.produtos {
+    height: 100%;
+    width: 100%;
+    background-color: #55D8F2;
+}
+
+.card {
+    width: 95%;
+}
+
+a:link { 
+    text-decoration: none;
+}
+
 
 
