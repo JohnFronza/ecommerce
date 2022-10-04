@@ -17,7 +17,7 @@ if (isset($_POST['register']) &&
             "senha" => $_POST["senha"]
 
         ))){
-            echo "Dados consultados com sucesso!";
+            header("Location: ../../?page=home");
         }
 
 }

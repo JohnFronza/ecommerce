@@ -1,3 +1,6 @@
+html {
+    overflow: hidden;
+}
 
 body {
     background-color: #065E70 !important;
@@ -48,9 +51,11 @@ body {
 }
 
 .produtos {
+    overflow: auto;
     height: 100%;
     width: 100%;
     background-color: #55D8F2;
+    padding-bottom: 100px;
 }
 
 .card {
@@ -60,6 +65,7 @@ body {
 a:link { 
     text-decoration: none;
 }
+
 
 
 

@@ -73,38 +73,7 @@
             <div class="produtos">
 
                 <script>
-                    $.post(
-                    "./scripts/php/produtos.php",
-                    {
-                        produtos: true,
-                    },
-                    function (data) {
-                        var data = JSON.parse(data);
-
-                        data.forEach((produto) => {
-                        produto["preco"] = parseFloat(produto["preco"]);
-                        console.log(produto);
-                        $(".produtos").append(
-                            `
-                            <div class="card mt-4 ml-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="${produto['img_caminho']}" class="img-fluid rounded-start" alt="${produto["nome"]}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <a class="card-title" href="pages/info.php"><b>${produto["nome"]}</b></a>
-                                            <h3>R$ ${produto["valor"]}</h3>
-                                            <textarea readonly class="form-control"> ${produto['descricao']}</textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            `
-                        );
-                        });
-                    }
-                    );
+                    
                 </script>
 
             </div>
