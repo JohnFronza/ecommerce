@@ -66,6 +66,29 @@ a:link {
     text-decoration: none;
 }
 
+.item {
+    background-color: white;
+    margin: 20px;
+}
+
+.imagem {
+    width: 200px;
+    height: 200px;
+    margin: 15px;
+}
+
+
+.item-info {
+    display: flex;
+    background-color: white;
+    margin: 20px;
+}
+
+.imagem-info {
+    width: 500px;
+    height: 500px;
+    margin: 15px;
+}
 
 
 

@@ -47,7 +47,7 @@
                 <form class="d-flex" role="search">
 
 
-                    <a href="?page=logout" class="button btn" type="submit" style="margin-right: 15px;">Logout</a>
+                <a href="?page=logout" class="button btn" type="submit" style="margin-right: 15px;">Logout</a>
 
                 </form>
             </div>
@@ -55,9 +55,60 @@
     </nav>
 
 
+    <div class="main">
+        <div class="janela">
+                <!-- Categorias -->
+            <div class="categorias">
+                <nav class="nav flex-column">
+                    <a class="nav-link disabled"><b>Eletrônicos</b></a>
+                    <a  class="nav-link active" aria-current="page" href="#">Celulares e Smartphones</a>
+                    <a  class="nav-link active" aria-current="page" href="#">TV e vídeo</a>
+                    <a class="nav-link disabled"><b>Casa</b></a>
+                    <a  class="nav-link active" aria-current="page" href="#">Eletrodomésticos</a>
+                    <a  class="nav-link active" aria-current="page" href="#">Móveis e decoração</a>
+                </nav>
+            </div>
 
-    <div class="form border border-info border-3 rounded">
+                <!-- Produtos -->
+            <div class="produtos">
 
+                <script>
+                    $.post(
+                    "./scripts/php/produtos.php",
+                    {
+                        produtos: true,
+                    },
+                    function (data) {
+                        var data = JSON.parse(data);
+
+                        data.forEach((produto) => {
+                        produto["preco"] = parseFloat(produto["preco"]);
+                        console.log(produto);
+                        $(".produtos").append(
+                            `
+                            <div class="item">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="${produto['img_caminho']}" class="imagem rounded-start" alt="${produto["nome"]}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h1 class="card-title" href="pages/info.php"><b>${produto["nome"]}</b></h1>
+                                            <h3>R$ ${produto["valor"]}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        );
+                        });
+                    }
+                    );
+                </script>
+
+            </div>
+        </div>
     </div>
+
 </body>
 </html>

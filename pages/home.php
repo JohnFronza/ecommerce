@@ -61,11 +61,11 @@
             <div class="categorias">
                 <nav class="nav flex-column">
                     <a class="nav-link disabled"><b>Eletrônicos</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Celulares e Smartphones</a>
-                    <a  class="nav-link active" aria-current="page" href="#">TV e vídeo</a>
+                    <a id="cel"  class="nav-link active" aria-current="page">Celulares e Smartphones</a>
+                    <a id="tv" class="nav-link active" aria-current="page">TV e vídeo</a>
                     <a class="nav-link disabled"><b>Casa</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Eletrodomésticos</a>
-                    <a  class="nav-link active" aria-current="page" href="#">Móveis e decoração</a>
+                    <a id="eletro"  class="nav-link active" aria-current="page">Eletrodomésticos</a>
+                    <a id="moveis"  class="nav-link active" aria-current="page">Móveis e decoração</a>
                 </nav>
             </div>
 
@@ -73,6 +73,18 @@
             <div class="produtos">
 
                 <script>
+
+                    //Categories
+                    $("#cel").click(function(){location.href = "?page=home"})
+                    $("#tv").click(function(){location.href = "?page=home"})
+                    $("#eletro").click(function(){location.href = "?page=home"})
+                    $("#moveis").click(function(){location.href = "?page=home"})
+
+
+
+
+
+                    //show products
                     $.post(
                     "./scripts/php/produtos.php",
                     {
@@ -86,26 +98,49 @@
                         console.log(produto);
                         $(".produtos").append(
                             `
-                            <div class="card mt-4 ml-3">
+                            <div id="${produto["id"]}" class="item">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="${produto['img_caminho']}" class="img-fluid rounded-start" alt="${produto["nome"]}">
+                                        <img src="${produto['img_caminho']}" class="imagem rounded-start">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <a class="card-title" href="pages/info.php"><b>${produto["nome"]}</b></a>
+                                            <h1 class="card-title"><b>${produto["nome"]}</b></h1>
                                             <h3>R$ ${produto["valor"]}</h3>
-                                            <textarea readonly class="form-control"> ${produto['descricao']}</textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             `
                         );
+                        
+                        //show singular product info
+                        $("#" + produto["id"]).click(function(){
+                            $(".produtos").html(`
+                            <div class="item-info">
+                                <img src="${produto['img_caminho']}" class="imagem-info">
+                                <div class="mt-5">
+                                    <h1><b>${produto["nome"]}</b></h1>
+                                    <br>
+                                    <h3>R$ ${produto["valor"]}</h3>
+                                    <br>
+                                    <p readonly>${produto["descricao"]}</p>
+                                </div>
+                            </div>
+                            `)
+                        })
+
+
                         });
                     }
                     );
+
+
+
+
                 </script>
+
+
 
             </div>
         </div>
@@ -113,3 +148,4 @@
 
 </body>
 </html>
+
