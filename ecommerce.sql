@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 04-Out-2022 às 18:08
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- Tempo de geração: 04-Out-2022 às 21:15
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -69,7 +69,8 @@ CREATE TABLE `produtos` (
 INSERT INTO `produtos` (`nome`, `descricao`, `id`, `categoriaid`, `img_caminho`, `valor`) VALUES
 ('Cellphone_1', 'It works', 1, 1, 'images/cellphone.jpg', 5000),
 ('Arabic Cellphone', 'Iraq technology', 2, 1, 'images/arabic.jpeg', 6),
-('iPhone 22', 'real', 3, 1, 'images/iphone22.png', 22222);
+('iPhone 22', 'real', 3, 1, 'images/iphone22.png', 22222),
+('Televisão Portátil | Hypson', 'televisão portátil em preto e branco tamanho 5,5 polegadas , voltagem 110,220,60hz,e pilha . • Cor: colorido/preto/branco • Descrição completa: televisão portátil em preto e branco tamanho 5,5 polegadas , voltagem 110,220,60hz,e pilha .', 4, 2, 'images/tubo.png', 156);
 
 --
 -- Índices para tabelas despejadas
@@ -96,7 +97,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(99) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(99) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
