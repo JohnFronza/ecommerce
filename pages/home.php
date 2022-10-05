@@ -61,7 +61,7 @@
             <div class="categorias">
                 <nav class="nav flex-column">
                     <a class="nav-link disabled"><b>Eletrônicos</b></a>
-                    <a id="cel"  class="nav-link active" aria-current="page">Celulares e Smartphones</a>
+                    <a id="cell"  class="nav-link active" aria-current="page">Celulares e Smartphones</a>
                     <a id="tv" class="nav-link active" aria-current="page">TV e vídeo</a>
                     <a class="nav-link disabled"><b>Casa</b></a>
                     <a id="eletro"  class="nav-link active" aria-current="page">Eletrodomésticos</a>
@@ -75,7 +75,7 @@
                 <script>
 
                     //Categories
-                    $("#cel").click(function(){location.href = "?page=home"})
+                    $("#cell").click(function(){location.href = "?page=home"})
                     $("#tv").click(function(){location.href = "?page=home"})
                     $("#eletro").click(function(){location.href = "?page=home"})
                     $("#moveis").click(function(){location.href = "?page=home"})
@@ -86,53 +86,49 @@
 
                     //show products
                     $.post(
-                    "./scripts/php/produtos.php",
-                    {
-                        produtos: true,
-                    },
-                    function (data) {
-                        var data = JSON.parse(data);
+                        "./scripts/php/produtos.php",
+                        {
+                            produtos: true,
+                        },
+                        function (data) {
+                            var data = JSON.parse(data);
 
-                        data.forEach((produto) => {
-                        produto["preco"] = parseFloat(produto["preco"]);
-                        console.log(produto);
-                        $(".produtos").append(
-                            `
-                            <div id="${produto["id"]}" class="item">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="${produto['img_caminho']}" class="imagem rounded-start">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h1 class="card-title"><b>${produto["nome"]}</b></h1>
-                                            <h3>R$ ${produto["valor"]}</h3>
+                            data.forEach((produto) => {
+                                produto["preco"] = parseFloat(produto["preco"]);
+                                console.log(produto);
+                                $(".produtos").append(`
+                                    <div id="${produto["id"]}" class="item">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                <img src="${produto['img_caminho']}" class="imagem rounded-start">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h1 class="card-title"><b>${produto["nome"]}</b></h1>
+                                                    <h3>R$ ${produto["valor"]}</h3>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            `
-                        );
-                        
-                        //show singular product info
-                        $("#" + produto["id"]).click(function(){
-                            $(".produtos").html(`
-                            <div class="item-info">
-                                <img src="${produto['img_caminho']}" class="imagem-info">
-                                <div class="mt-5">
-                                    <h1><b>${produto["nome"]}</b></h1>
-                                    <br>
-                                    <h3>R$ ${produto["valor"]}</h3>
-                                    <br>
-                                    <p readonly>${produto["descricao"]}</p>
-                                </div>
-                            </div>
-                            `)
-                        })
-
-
-                        });
-                    }
+                                    `);
+                                
+                                //show singular product info
+                                $("#" + produto["id"]).click(function(){
+                                    $(".produtos").html(`
+                                    <div class="item-info">
+                                        <img src="${produto['img_caminho']}" class="imagem-info">
+                                        <div class="mt-5">
+                                            <h1><b>${produto["nome"]}</b></h1>
+                                            <br>
+                                            <h3>R$ ${produto["valor"]}</h3>
+                                            <br>
+                                            <p readonly>${produto["descricao"]}</p>
+                                        </div>
+                                    </div>
+                                    `)
+                                })
+                            });
+                        }
                     );
 
 
