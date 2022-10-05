@@ -44,13 +44,13 @@ body {
     background-color: azure;
 }
 
-.categorias {
+.categorias, .cart_items_info {
     height: 100%;
     min-width: 300px;
     background-color: #0CCAF0;
 }
 
-.produtos {
+.produtos, .cart_items {
     overflow: auto;
     height: 100%;
     width: 100%;
@@ -88,6 +88,10 @@ a:link {
     width: 500px;
     height: 500px;
     margin: 15px;
+}
+
+.cart{
+    background-color: salmon !important;
 }
 
 

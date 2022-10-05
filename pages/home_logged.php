@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
- 
-   
-
-
-    </style>
+    <title>Ecommerce</title>
 </head>  
 <body>
     <nav class="navbar navbar-expand-lg"> 
@@ -23,31 +18,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="?page=home">Home</a>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
+                        <a class="nav-link active" aria-current="page" href="?page=cart">Cart</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
 
 
-                <a href="?page=logout" class="button btn" type="submit" style="margin-right: 15px;">Logout</a>
+                    <a href="?page=logout" class="button btn" type="submit" style="margin-right: 15px;">Logout</a>
 
                 </form>
             </div>
@@ -60,12 +40,13 @@
                 <!-- Categorias -->
             <div class="categorias">
                 <nav class="nav flex-column">
+                    <a id="home" class="nav-link active" ><b>Home</b></a>
                     <a class="nav-link disabled"><b>Eletrônicos</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Celulares e Smartphones</a>
-                    <a  class="nav-link active" aria-current="page" href="#">TV e vídeo</a>
+                    <a id="cell"  class="nav-link active" aria-current="page">Celulares e Smartphones</a>
+                    <a id="tv" class="nav-link active" aria-current="page">TV e vídeo</a>
                     <a class="nav-link disabled"><b>Casa</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Eletrodomésticos</a>
-                    <a  class="nav-link active" aria-current="page" href="#">Móveis e decoração</a>
+                    <a id="eletro"  class="nav-link active" aria-current="page">Eletrodomésticos</a>
+                    <a id="moveis"  class="nav-link active" aria-current="page">Móveis e decoração</a>
                 </nav>
             </div>
 
@@ -73,38 +54,73 @@
             <div class="produtos">
 
                 <script>
-                    $.post(
-                    "./scripts/php/produtos.php",
-                    {
-                        produtos: true,
-                    },
-                    function (data) {
-                        var data = JSON.parse(data);
 
-                        data.forEach((produto) => {
-                        produto["preco"] = parseFloat(produto["preco"]);
-                        console.log(produto);
-                        $(".produtos").append(
-                            `
-                            <div class="item">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="${produto['img_caminho']}" class="imagem rounded-start" alt="${produto["nome"]}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h1 class="card-title" href="pages/info.php"><b>${produto["nome"]}</b></h1>
-                                            <h3>R$ ${produto["valor"]}</h3>
+                    //show products
+                    
+                    function produtos(id){
+                        $(".produtos").html("")
+                        $.post(
+                            "./scripts/php/produtos.php",
+                            {
+                                produtos: true,
+                                idcategoria: id
+                            },
+                            function (data) {
+                                var data = JSON.parse(data);
+
+                                data.forEach((produto) => {
+                                    produto["preco"] = parseFloat(produto["preco"]);
+                                    console.log(produto);
+                                    $(".produtos").append(`
+                                        <div id="${produto["id"]}" class="item">
+                                            <div class="row g-0">
+                                                <div class="col-md-4">
+                                                    <img src="${produto['img_caminho']}" class="imagem rounded-start">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                    <h1 class="card-title"><b>${produto["nome"]}</b></h1>
+                                                    <h3>R$ ${produto["valor"]}</h3>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            `
-                        );
-                        });
-                    }
-                    );
+                                        `);
+                                        
+                                        //show singular product info
+                                        $("#" + produto["id"]).click(function(){
+                                            $(".produtos").html(`
+                                            <div class="item-info">
+                                            <img src="${produto['img_caminho']}" class="imagem-info">
+                                                <div class="mt-5">
+                                                    <h1><b>${produto["nome"]}</b></h1>
+                                                    <br>
+                                                    <h3>R$ ${produto["valor"]}</h3>
+                                                    <br>
+                                                    <p readonly>${produto["descricao"]}</p>
+                                                    <button class="cart btn">Add to cart</button>
+                                                </div>
+                                            </div>
+                                        `)
+                                    })
+                                });
+                            }
+                            );
+
+                        }
+
+                        
+                        
+                        
+                                            //Categories
+                                            $("#home").click(function(){location.href = "?page=home"})
+                                            $("#cell").click(function(){produtos(1)})
+                                            $("#tv").click(function(){produtos(2)})
+                                            $("#eletro").click(function(){produtos(3)})
+                                            $("#moveis").click(function(){produtos(4)})
+
                 </script>
+
+
 
             </div>
         </div>
@@ -112,3 +128,4 @@
 
 </body>
 </html>
+

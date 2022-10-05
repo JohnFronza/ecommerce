@@ -23,11 +23,15 @@ if (isset($_GET["page"])){
 
     if ($link == "home")
         home();
+        
     elseif ($link == "login")
         include "pages/login.html";
         
     elseif ($link == "register")
         include "pages/register.html";
+
+    elseif ($link == "cart")
+        include "pages/cart.html";
 
     elseif ($link == "logout") {
         unset($_SESSION["nome"]);
