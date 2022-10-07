@@ -46,6 +46,68 @@
                 <!-- Items -->
             <div class="cart_items">
 
+                <script>
+                    
+                    function updateList(){
+                        $.post(
+                            "./scripts/php/cart.php",
+                            {
+                                cart_list: true
+                            },
+                            function (data) {
+                                    var data = JSON.parse(data);
+                                    var produtos = data[1]; 
+                                    var ids = data[0]; /// 1,3,2,6
+                                    console.log(ids);
+    
+                                    ids.forEach((id) => {
+                                        var produto = produtos[id - 1]
+                                        produto["preco"] = parseFloat(produto["preco"]);
+    
+                                        var id = String(produto["id"]);
+                                        var index = ids.indexOf(id);
+    
+                                        if (index != -1){
+                                            $(".cart_items").append(`
+                                                <div id="${produto["id"]}" class="item">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-4">
+                                                            <img src="${produto['img_caminho']}" class="imagem rounded-start">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="card-body">
+                                                            <h1 class="card-title"><b>${produto["nome"]}</b></h1>
+                                                            <h3>R$ ${produto["valor"]}</h3>
+                                                            <button id="remove_${id}" class="cart btn">Remove from cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `);  
+    
+                                            $("#remove_" + id).click(function(){
+                                                $.post(
+                                                    "./scripts/php/cart.php",
+                                                    {
+                                                        remove: true,
+                                                        index: index
+                                                    },
+                                                function (data){
+                                                    $(".cart_items").html("")
+                                                    updateList();
+                                                }
+                                                )
+                                            })
+                                        }
+                                    })
+                                        
+                            }
+                        )
+                    }
+                    
+                    
+                    updateList();
+                </script>
+
             </div>
         </div>
     </div>

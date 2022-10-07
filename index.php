@@ -8,9 +8,9 @@
 
 function home(){
     if (isset($_SESSION["nome"]) && isset($_SESSION["email"]) && isset($_SESSION["senha"]))
-        include "pages/home_logged.php";
+        include "pages/home_logged.html";
     else
-        include "pages/home.php";
+        include "pages/home.html";
 }
 
 
