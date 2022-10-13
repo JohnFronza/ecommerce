@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<he >
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,53 +35,88 @@
                 <!-- Categorias -->
             <div class="categorias">
                 <nav class="nav flex-column">
+                    <a id="home" class="nav-link active" ><b>Home</b></a>
                     <a class="nav-link disabled"><b>Eletrônicos</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Celulares e Smartphones</a>
-                    <a  class="nav-link active" aria-current="page" href="#">TV e vídeo</a>
+                    <a id="cell"  class="nav-link active" aria-current="page">Celulares e Smartphones</a>
+                    <a id="tv" class="nav-link active" aria-current="page">TV e vídeo</a>
                     <a class="nav-link disabled"><b>Casa</b></a>
-                    <a  class="nav-link active" aria-current="page" href="#">Eletrodomésticos</a>
-                    <a  class="nav-link active" aria-current="page" href="#">Móveis e decoração</a>
+                    <a id="eletro"  class="nav-link active" aria-current="page">Eletrodomésticos</a>
+                    <a id="moveis"  class="nav-link active" aria-current="page">Móveis e decoração</a>
                 </nav>
             </div>
 
                 <!-- Produtos -->
-            <div class="produtos">
+                <div class="produtos">
 
-                <script>
-                    $.post(
-                    "./scripts/php/produtos.php",
-                    {
-                        produtos: true,
-                    },
-                    function (data) {
-                        var data = JSON.parse(data);
+<script>
 
-                        data.forEach((produto) => {
-                        produto["preco"] = parseFloat(produto["preco"]);
-                        console.log(produto);
-                        $(".produtos").append(
-                            `
-                            <div class="item">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="${produto['img_caminho']}" class="imagem rounded-start" alt="${produto["nome"]}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h1 class="card-title" href="pages/info.php"><b>${produto["nome"]}</b></h1>
-                                            <h3>R$ ${produto["valor"]}</h3>
-                                        </div>
-                                    </div>
+    //show products
+    
+    function produtos(id){
+        $(".produtos").html("")
+        $.post(
+            "./scripts/php/produtos.php",
+            {
+                produtos: true,
+                idcategoria: id
+            },
+            function (data) {
+                var data = JSON.parse(data);
+
+                data.forEach((produto) => {
+                    produto["preco"] = parseFloat(produto["preco"]);
+                    console.log(produto);
+                    $(".produtos").append(`
+                        <div id="${produto["id"]}" class="item">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="${produto['img_caminho']}" class="imagem rounded-start">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                    <h1 class="card-title"><b>${produto["nome"]}</b></h1>
+                                    <h3>R$ ${produto["valor"]}</h3>
                                 </div>
                             </div>
-                            `
-                        );
-                        });
-                    }
-                    );
-                </script>
+                        </div>
+                        `);
+                        
+                        //show singular product info
+                        $("#" + produto["id"]).click(function(){
+                            $(".produtos").html(`
+                            <div class="item-info">
+                            <img src="${produto['img_caminho']}" class="imagem-info">
+                                <div class="mt-5">
+                                    <h1><b>${produto["nome"]}</b></h1>
+                                    <br>
+                                    <h3>R$ ${produto["valor"]}</h3>
+                                    <br>
+                                    <p readonly>${produto["descricao"]}</p>
+                                </div>
+                            </div>
+                        `)
+                    })
+                });
+            }
+            );
 
-            </div>
+        }
+
+        
+        
+        
+                            //Categories
+                            $("#home").click(function(){location.href = "?page=home"})
+                            $("#cell").click(function(){produtos(1)})
+                            $("#tv").click(function(){produtos(2)})
+                            $("#eletro").click(function(){produtos(3)})
+                            $("#moveis").click(function(){produtos(4)})
+
+</script>
+
+
+
+</div>
         </div>
     </div>
 
