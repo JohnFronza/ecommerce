@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,25 +71,27 @@
 
                                 data.forEach((produto) => {
                                     produto["preco"] = parseFloat(produto["preco"]);
-                                    console.log(produto);
+                                    
                                     $(".produtos").append(`
-                                        <div id="${produto["id"]}" class="item">
-                                            <div class="row g-0">
-                                                <div class="col-md-4">
-                                                    <img src="${produto['img_caminho']}" class="imagem rounded-start">
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                    <h1 class="card-title"><b>${produto["nome"]}</b></h1>
-                                                    <h3>R$ ${produto["valor"]}</h3>
+                                            <div id="${produto["id"]}" class="item">
+                                                <div class="row g-0">
+                                                    <div class="col-md-4">
+                                                        <img src="${produto['img_caminho']}" class="imagem rounded-start">
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="card-body">
+                                                        <h1 class="card-title"><b>${produto["nome"]}</b></h1>
+                                                        <h3>R$ ${produto["valor"]}</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         `);
-                                        
-                                        //show singular product info
-                                        $("#" + produto["id"]).click(function(){
-                                            $(".produtos").html(`
+                                    
+                                    
+
+                                    //show singular product info
+                                    $("#" + produto["id"]).click(function(){
+                                        $(".produtos").html(`
                                             <div class="item-info">
                                             <img src="${produto['img_caminho']}" class="imagem-info">
                                                 <div class="mt-5">
@@ -97,11 +100,22 @@
                                                     <h3>R$ ${produto["valor"]}</h3>
                                                     <br>
                                                     <p readonly>${produto["descricao"]}</p>
-                                                    <button class="cart btn">Add to cart</button>
-                                                </div>
+                                                    <button id="addcart" class="cart btn">Add to cart</button>
+                                                </div
                                             </div>
                                         `)
+
+                                    $("#addcart").click(function(){
+                                        $.post(
+                                            "./scripts/php/cart.php",
+                                            {
+                                                addtocart: true,
+                                                idproduto: produto["id"]
+                                            }
+                                        )
                                     })
+                                    })
+                                   
                                 });
                             }
                             );
@@ -111,12 +125,12 @@
                         
                         
                         
-                                            //Categories
-                                            $("#home").click(function(){location.href = "?page=home"})
-                                            $("#cell").click(function(){produtos(1)})
-                                            $("#tv").click(function(){produtos(2)})
-                                            $("#eletro").click(function(){produtos(3)})
-                                            $("#moveis").click(function(){produtos(4)})
+                    //Categories
+                    $("#home").click(function(){location.href = "?page=home"})
+                    $("#cell").click(function(){produtos(1)})
+                    $("#tv").click(function(){produtos(2)})
+                    $("#eletro").click(function(){produtos(3)})
+                    $("#moveis").click(function(){produtos(4)})
 
                 </script>
 
